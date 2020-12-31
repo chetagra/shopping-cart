@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+<body>
+    
+       
+           <table  border="1" cellspacing='5' cellpadding= '10'>
+               <thead>
+                  <th>Product Name</th>
+                    <th>Seller</th>
+                     <th>Price</th>
+
+               </thead>
+               <tbody>
+             {{#each arr as |a|}}
+                 <tr>
+                     <td>{{a.name}}</td>
+                     <td>{{a.seller}}</td>
+                     <td>{{a.Price}}</td>
+                 </tr>
+             {{/each}}
+             </tbody>
+           </table>  
+      
+               
+     
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+</head>
+<body>
+
+<form method="POST" action="/cart">
+
+ <h1> Select Product </h1>
+
+     <select name="product">
+         {{#each results as |r|}}
+
+         <option value="{{r.name}}">{{r.name}}</option>
+             
+         {{/each}}
+     </select>
+
+
+   <button type="submit">Add to cart</button>
+</form>
+    
+</body>
+</html>
