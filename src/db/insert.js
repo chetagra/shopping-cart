@@ -1,6 +1,8 @@
 const {MongoClient} = require('mongodb')
 
-MongoClient.connect('mongodb://localhost:27017',(err,client)=> {
+const uri = process.env.MONGODB_URI ;
+
+MongoClient.connect(uri,(err,client)=> {
     if (err) throw err
 
     const db = client.db('shopdb')
