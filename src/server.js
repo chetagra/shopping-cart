@@ -24,7 +24,7 @@ app.post('/cart',async(req,res)=>{
 
         let name = req.body.product
 
-        const uri = process.env.MONGODB_URI ;
+        const uri = process.env.MONGODB_URI||'mongodb://localhost:27017';
      
         const client= await MongoClient.connect(uri)
         
@@ -57,7 +57,7 @@ app.get('/',async(req,res)=>{
 
     try {
 
-        const uri = process.env.MONGODB_URI ;    
+        const uri = process.env.MONGODB_URI||'mongodb://localhost:27017' ;    
 
     const client= await MongoClient.connect(uri)
     
