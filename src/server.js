@@ -75,8 +75,6 @@ app.get('/',async(req,res)=>{
 
 })
 
-app.listen(3333,()=>{
-    console.log('http://localhost:3333');
-})
+module.exports=app
 
 
