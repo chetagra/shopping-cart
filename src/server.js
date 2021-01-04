@@ -1,84 +1,69 @@
 const express = require('express')
+
 const app = express()
-const {MongoClient} = require('mongodb')
+
+const cart = require('./db/model')
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
-app.set('view Engine','hbs')
+app.set('view engine','hbs')
 
-let product = {}
+let allproducts=[]
 
-let arr=[]
-
-app.get('/cart',(req,res)=>{
-    res.render(__dirname+'/views/cart.hbs',{
-        arr
-    })
-})
-
-app.post('/cart',async(req,res)=>{
-
-
-    try {
-
-        let name = req.body.product
-
-        const uri = process.env.MONGODB_URI||'mongodb://localhost:27017';
-     
-        const client= await MongoClient.connect(uri)
-        
-        const db = client.db('shopdb')
-        
-        const collection= db.collection('items')
-    
-        const results= await collection.find({}).toArray()
-        
-       
-
-        results.forEach(Element=>{
-          if (Element.name==name) {
-              product=Element
-          }
-        })
-
-        arr.push(product)
-       
-        res.redirect('/cart')  
-
-    } catch (e) {
-        console.error(e)
-    }
-
-})
-
+let products=[]
 
 app.get('/',async(req,res)=>{
 
     try {
 
-        const uri = process.env.MONGODB_URI||'mongodb://localhost:27017' ;    
 
-    const client= await MongoClient.connect(uri)
-    
-    const db = client.db('shopdb')
-    
-    const collection= db.collection('items')
+        const items = await cart.find({})
 
-    const results= await collection.find({}).toArray()
-
-    res.render(__dirname+'/views/home.hbs',{
-        results
-    })
+        items.forEach(element => {
+            allproducts.push(element)
+        })
         
-    } catch (e) {
-        console.error(e)
-    }
+       
 
-    
+        res.render(__dirname+'/public/index.hbs',{allproducts})
+
+    } catch (e) {
+
+        console.error(e);
+    }
 
 })
 
-module.exports=app
 
 
+
+
+app.post('/cart',async (req,res)=>{
+    try {
+        let productName = req.body.product
+        
+        
+
+        const item = await cart.find({
+            productName : productName
+        })
+
+       item.forEach(element => {
+           products.push(element)
+       })
+  
+
+       res.render(__dirname+'/public/cart.hbs',{products})
+        
+    } catch (error) {
+        console.error(error);
+    }
+  
+})
+
+const port = process.env.PORT || 3333
+
+app.listen(port,()=>{
+    console.log(`http://localhost:${port}`)
+})

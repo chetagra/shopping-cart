@@ -4,17 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./src/run.js",
+    "start": "node ./src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chetagra/shopping-cart.git"
   },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chetagra/shopping-cart/issues"
+  },
+  "homepage": "https://github.com/chetagra/shopping-cart#readme",
   "dependencies": {
-    "chai": "^4.2.0",
     "express": "^4.17.1",
     "hbs": "^4.1.1",
-    "mocha": "^8.2.1",
-    "mongodb": "^3.6.3",
-    "request": "^2.88.2"
+    "mongoose": "^5.11.9"
   }
 }
